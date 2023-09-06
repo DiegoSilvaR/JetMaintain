@@ -1,0 +1,74 @@
+<%= form_with(model: mantenimiento) do |form| %>
+  <% if mantenimiento.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(mantenimiento.errors.count, "error") %> prohibited this mantenimiento from being saved:</h2>
+
+      <ul>
+        <% mantenimiento.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :motor_id, "Seleccionar Motor:", style: "display: block" %>
+    <%= form.collection_select :motor_id, Motor.all, :id, :nombre, { prompt: "Seleccionar un motor" } %>
+  </div>
+
+  <div>
+    <%= form.label :tipo_motor, style: "display: block" %>
+    <%= form.select :tipo_motor, options_for_select(["REAC", "TURBO"], selected: mantenimiento.tipo_motor), {}, { class: "motor-type-select" } %>
+  </div>
+
+  <div>
+    <%= form.label :tipo_mantenimiento, style: "display: block" %>
+    <%= form.select :tipo_mantenimiento, options_for_select(["Preventivo", "Correctivo"], selected: mantenimiento.tipo_mantenimiento) %>
+  </div>
+
+  <div>
+    <%= form.label :ciudad, style: "display: block" %>
+    <%= form.select :ciudad, options_for_select(["Santiago", "Valparaíso", "Concepción", "Antofagasta", "Iquique", "Arica", "La Serena", "Punta Arenas", "Rancagua", "Temuco", "Chillán", "Curicó", "Osorno", "Copiapó", "Quillota", "Talca", "Calama", "Los Ángeles", "Puerto Montt"], selected: mantenimiento.ciudad) %>
+  </div>
+
+ <div>
+  <%= form.label :materiales, style: "display: block" %>
+  <%= form.select :materiales, options_for_select([
+    "Aceite lubricante",
+    "Filtro de aire",
+    "Bujías de encendido",
+    "Aceite hidráulico",
+    "Aceite de turbina",
+    "Aceite de motor",
+    "Filtros de aceite",
+    "Bujías de ignición",
+    "Bujías de precalentamiento",
+    "Filtros de combustible",
+    "Bujes",
+    "Cojinetes",
+    "Válvulas",
+    "Sellos",
+    "Empaquetaduras",
+    "Tornillos",
+    "Arandelas",
+    "Tuercas",
+    "Juntas tóricas",
+    "Correas de transmisión"
+  ], selected: mantenimiento.materiales), { multiple: true, size: 3 } %>
+</div>
+
+
+  <div>
+    <%= form.label :fecha_mantenimiento, style: "display: block" %>
+    <%= form.date_field :fecha_mantenimiento %>
+  </div>
+
+  <div>
+    <%= form.label :tecnico_email, style: "display: block" %>
+    <%= form.text_field :tecnico_email, value: current_user.email, readonly: true %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

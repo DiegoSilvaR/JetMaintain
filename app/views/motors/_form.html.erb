@@ -1,0 +1,42 @@
+<%= form_with(model: motor) do |form| %>
+  <% if motor.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(motor.errors.count, "error") %> prohibited this motor from being saved:</h2>
+
+      <ul>
+        <% motor.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :tipo_equipo, style: "display: block" %>
+    <%= form.select :tipo_equipo, Motor.tipo_equipos.keys %>
+  </div>
+
+  <div>
+  <%= form.label :nombre, style: "display: block" %>
+  <%= form.text_field :nombre, value: 'REAC', placeholder: 'Ingrese el número' %>
+</div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :image, style: "display: block" %>
+    <%= form.file_field :image %>
+  </div>
+
+  <div>
+  <%= form.label :user_id, style: "display: block" %>
+  <%= form.collection_select :user_id, User.all, :id, :email %>
+</div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

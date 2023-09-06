@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tipo_motor: MyString
+  tipo_mantenimiento: MyString
+  motor: one
+  ciudad: MyString
+  materiales: MyString
+  fecha_mantenimiento: 2023-09-05
+  tecnico_email: MyString
+
+two:
+  tipo_motor: MyString
+  tipo_mantenimiento: MyString
+  motor: two
+  ciudad: MyString
+  materiales: MyString
+  fecha_mantenimiento: 2023-09-05
+  tecnico_email: MyString

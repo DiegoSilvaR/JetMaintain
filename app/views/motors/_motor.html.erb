@@ -1,0 +1,48 @@
+<style>
+  .thumbnail {
+    width: 50px;
+    height: 50px;
+  }
+
+  .table-container {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+</style>
+
+<div class="table-container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Tipo equipo</th>
+        <th>Nombre</th>
+        <th>Description</th>
+        <th>Image</th>
+        <th>User</th>
+        <th>Rol</th>
+        <th>Detalles</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= motor.tipo_equipo %></td>
+        <td><%= motor.nombre %></td>
+        <td><%= motor.description %></td>
+        <td>
+          <% if motor.image.attached? %>
+            <%= image_tag motor.image, class: "thumbnail" %>
+          <% else %>
+            <i class="fas fa-fax fa-2x"></i> <!-- Ícono de motor de Font Awesome -->
+          <% end %>
+        </td>
+        <td><%= motor.user.email if motor.user %></td>
+        <td><%= motor.user.role.titleize if motor.user %></td>
+        <td>
+          <%= link_to motor_path(motor) do %>
+            <i class="fas fa-info-circle fa-2x"></i>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

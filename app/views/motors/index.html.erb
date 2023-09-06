@@ -1,0 +1,85 @@
+<style>
+  .thumbnail {
+    width: 50px;
+    height: 50px;
+  }
+
+  .table-container {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  /* Estilo dark para la tabla */
+  .table-dark {
+    background-color: #343a40; /* Cambia este color según tu preferencia */
+    color: #fff; /* Color de texto en la tabla */
+  }
+
+  /* Estilo para los íconos */
+  .btn-icon {
+    font-size: 20px;
+    margin-right: 5px; /* Espacio entre ícono y texto */
+  }
+  .scrollable-card::-webkit-scrollbar {
+  width: 12px;
+  background-color: #F5F5F5;
+}
+
+.scrollable-card::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #4285F4;
+}
+
+.scrollable-card {
+  scrollbar-color: #4285F4 #F5F5F5;
+}
+</style>
+
+<p style="color: green"><%= notice %></p>
+<h1>Motores</h1>
+
+<div class="glass card  text-white">
+  <div class="card-body">
+    <div class="table-container scrollable-card">
+      <table class="table table-bordered table-responsive table-dark ">
+        <thead>
+          <tr>
+            <th>Tipo Equipo</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Image</th>
+            <th>User</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @motors.each do |motor| %>
+            <tr>
+              <td><%= motor.tipo_equipo %></td>
+              <td><%= motor.nombre %></td>
+              <td><%= motor.description %></td>
+              <td>
+                <% if motor.image.attached? %>
+                  <%= image_tag motor.image, class: "thumbnail" %>
+                <% else %>
+                  <i class='fas fa-fax fa-2x'></i>
+                <% end %>
+              </td>
+              <td><%= motor.user.email if motor.user %></td>
+              <td><%= motor.user.role.titleize if motor.user %></td>
+              <td>
+                <%= link_to "<i class='fas fa-eye btn-icon'></i>".html_safe, motor, class: "btn btn-primary", title: "Ver" %>
+                <%= link_to "<i class='fas fa-edit btn-icon'></i>".html_safe, edit_motor_path(motor), class: "btn btn-secondary", title: "Editar" %>
+                <%= link_to "<i class='fas fa-trash btn-icon'></i>".html_safe, motor, method: :delete, data: { confirm: "¿Estás seguro?" }, class: "btn btn-danger", title: "Eliminar" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%= link_to "Nuevo motor", new_motor_path, class: "btn btn-success" %>

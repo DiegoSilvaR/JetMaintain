@@ -1,0 +1,51 @@
+<style >
+  .scrollable-card {
+  max-height: 600px;
+  overflow-y: auto;
+}
+</style>
+<div class="container mt-5">
+  <h1 class="display-4 text-center mb-4">¡Bienvenido a JetMaintain!</h1>
+  <p class="lead text-center">Tu solución de mantenimiento para motores de avión</p>
+</div>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6 ">
+      <div class="card glass text-white scrollable-card">
+        <div class="card-header">
+          Mantenimientos Recientes
+        </div>
+        <div class="card-body">
+          <% @mantenimientos.each do |mantenimiento| %>
+            <h5 class="card-title"><%= mantenimiento.tipo_motor %></h5>
+            <p class="card-text">
+              Tipo de Mantenimiento: <%= mantenimiento.tipo_mantenimiento %><br>
+              Ciudad: <%= mantenimiento.ciudad %><br>
+              Fecha de Mantenimiento: <%= mantenimiento.fecha_mantenimiento.strftime("%Y-%m-%d") %>
+            </p>
+          <% end %>
+          <%= link_to "Ver todos los mantenimientos", mantenimientos_path, class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card glass text-white scrollable-card">
+        <div class="card-header">
+          Motores Disponibles
+        </div>
+        <div class="card-body">
+          <% @motors.each do |motor| %>
+            <h5 class="card-title"><%= motor.nombre %></h5>
+            <p class="card-text">
+              Tipo de Equipo: <%= motor.tipo_equipo %><br>
+              Descripción: <%= motor.description %><br>
+              Usuario: <%= motor.user.email if motor.user %>
+            </p>
+          <% end %>
+          <%= link_to "Ver todos los motores", motors_path, class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

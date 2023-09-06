@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-8">
+      <div class="glass card text-white">
+        <div class="card-body text-center">
+          <h2 class="card-title">Términos y Condiciones de Uso de JetMaintain</h2>
+          <p class="card-text">Por favor, lea detenidamente estos Términos y Condiciones de Uso ("Términos") antes de utilizar la aplicación web JetMaintain (en adelante "nosotros" o "nuestra").</p>
+
+          <h3>Aceptación de los Términos</h3>
+
+          <p>Al acceder o utilizar JetMaintain, usted acepta estar sujeto a estos Términos. Si no está de acuerdo con alguno de estos Términos, no utilice nuestra aplicación.</p>
+
+          <h3>Uso de la Aplicación</h3>
+
+          <p>Usted acepta utilizar JetMaintain únicamente con fines legales y de acuerdo con estos Términos. No debe utilizar la aplicación de ninguna manera que pueda dañar, deshabilitar, sobrecargar o perjudicar la aplicación o interferir con el uso de la misma por parte de terceros.</p>
+
+          <h3>Privacidad</h3>
+
+          <p>Su uso de JetMaintain también está sujeto a nuestra Política de Privacidad, que puede encontrar en [enlace a la política de privacidad]. Al utilizar la aplicación, usted acepta nuestras prácticas de recopilación y uso de información como se describe en la Política de Privacidad.</p>
+
+          <h3>Modificaciones</h3>
+
+          <p>Nos reservamos el derecho de modificar o revisar estos Términos en cualquier momento. Cualquier cambio entrará en vigencia inmediatamente después de la publicación en esta página. Le recomendamos que revise periódicamente los Términos para estar al tanto de las actualizaciones.</p>
+
+          <h3>Aceptación de los Términos</h3>
+
+          <p>Al hacer clic en el botón "Acepto" a continuación, usted confirma que ha leído, entendido y aceptado estos Términos y Condiciones de Uso.</p>
+
+          <!-- Formulario para aceptar los términos -->
+         <%= form_tag accept_terms_path, id: 'accept-terms-form' do %>
+  <%= hidden_field_tag :accepted, true %>
+  <%= submit_tag "He leído y acepto los términos", class: "btn btn-primary", id: "accept-button" %>
+<% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const acceptButton = document.querySelector('#accept-button');
+
+    acceptButton.addEventListener('click', function(event) {
+      event.preventDefault();
+
+      Swal.fire({
+        title: '¿Estás seguro?',
+        text: '¿Quieres aceptar los términos y condiciones?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, aceptar',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Si el usuario confirma, envía el formulario
+          document.querySelector('#accept-terms-form').submit();
+        } else {
+          Swal.fire('Términos no aceptados', 'Debes aceptar los términos y condiciones para continuar.', 'error');
+        }
+      });
+    });
+  });
+</script>
